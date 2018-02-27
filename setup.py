@@ -24,7 +24,7 @@ install_requires = ["setuptools >=0.5", "mock"]
 
 setup(
     name="setuptools-cmmi",
-    version="0.2.0",
+    version="0.2.1",
     author="padev",
     author_email="padev@zillowgroup.com",
     description="Egg to handle the CMMI custom task in setuptools.",
