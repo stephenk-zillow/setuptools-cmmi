@@ -69,6 +69,7 @@ def _check_var(values, key):
 
 def cmmi_entry_point(dist, attr, org_values):
     """Main entry point for this extension."""
+    print('CMMI ENTRY POINT INVOKED')
     vars = _load_vars()
 
     values = _substitute_vars(org_values, vars)
@@ -104,6 +105,7 @@ def cmmi_entry_point(dist, attr, org_values):
 
 def download_unpack_file(url, temp_work_dir):
     """Download and unpack the specified file."""
+    print('CMMI DOWNLOAD_UNPACK_FILE')
     LOG.info("Starting download for {0}".format(url))
     filehandle, _ = req.urlretrieve(url)
     unpack_archive(filehandle, temp_work_dir)
