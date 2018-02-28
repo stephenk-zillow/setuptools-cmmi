@@ -1,4 +1,5 @@
 import os
+import sys
 
 import logging
 from distutils.errors import DistutilsSetupError
@@ -25,6 +26,7 @@ def _run(root_path, exec_name, description, args):
     """Run the specified path after making sure it exists."""
     print('CMMI RUN roto_path={} exec_name={} desc={} args={}'
           .format(root_path, exec_name, description, args))
+    sys.stdout.flush()
 
     if os.path.exists(os.path.join(root_path, exec_name)):
         exec_path = os.path.join(root_path, exec_name)
@@ -38,8 +40,10 @@ def _run(root_path, exec_name, description, args):
             exec_path = exec_path + " " + args
     LOG.info("Running {}".format(exec_path))
     print('CMMI RUNNING EXEC_PATH={}'.format(exec_path))
+    sys.stdout.flush()
     rc = os.system(exec_path)
     print('CMMI DONE RUNNING EXEC_PATH={}, rc={}'.format(exec_path, rc))
+    sys.stdout.flush()
     if rc != 0:
         raise DistutilsSetupError("{0} exited with return code: {1}."
                                   .format(exec_path, rc))
@@ -48,6 +52,7 @@ def _run(root_path, exec_name, description, args):
 def process_cmmi(dest_dir, temp_source_dir, config_options, autogen, config_name=None):
     """Run through the CMMI process with the given parameters."""
     print('PROCESS CMMI FOR DEST DIR {}'.format(dest_dir))
+    sys.stdout.flush()
     LOG.debug("Making dir {}".format(dest_dir))
     if not os.path.exists(dest_dir):
         os.makedirs(dest_dir)
