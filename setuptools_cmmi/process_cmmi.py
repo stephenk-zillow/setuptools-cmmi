@@ -63,12 +63,24 @@ def process_cmmi(dest_dir, temp_source_dir, config_options, autogen, config_name
         src_root = _find_source_root_dir(temp_source_dir)
         os.chdir(src_root)
 
+        print('AUTOGEN? {}'.format(autogen))
+        sys.stdout.flush()
         if autogen:
+            print('RUN: AUTOGEN')
+            sys.stdout.flush()
             _run(src_root, autogen, "Autogen")
+        print('RUN: CONFIGURE')
+        sys.stdout.flush()
         _run(src_root, config_name or "configure", "Configure", config_options)
+        print('RUN: MAKE')
+        sys.stdout.flush()
         _run(src_root, "make", "make", None)
+        print('RUN: MAKE INSTALL')
+        sys.stdout.flush()
         _run(src_root, "make", "make install", "install")
-
-
+        print('END OF process_cmmi')
+        sys.stdout.flush()
     finally:
+        print('FINALLY! process_cmmi')
+        sys.stdout.flush()
         os.chdir(pushd)
